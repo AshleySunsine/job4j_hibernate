@@ -12,7 +12,7 @@ public class Mark {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "mark")
     private List<Car> cars = new ArrayList<>();
 
     public static Mark of(String name) {
@@ -64,5 +64,14 @@ public class Mark {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, cars);
+    }
+
+    @Override
+    public String toString() {
+        return "Mark{"
+               + "id=" + id
+               + ", name='" + name + '\''
+               + ", cars=" + cars
+               + '}';
     }
 }

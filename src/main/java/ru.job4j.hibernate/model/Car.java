@@ -10,9 +10,13 @@ public class Car {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "mark_id")
+    private Mark mark;
 
-    public static Car of(String name) {
+    public static Car of(String name, Mark mark) {
         Car car = new Car();
+        car.mark = mark;
         car.name = name;
         return car;
     }
@@ -42,11 +46,20 @@ public class Car {
             return false;
         }
         Car car = (Car) o;
-        return id == car.id && Objects.equals(name, car.name);
+        return id == car.id && Objects.equals(name, car.name) && Objects.equals(mark, car.mark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, mark);
+    }
+
+    @Override
+    public String toString() {
+        return "Car{"
+               + "id=" + id
+               + ", name='" + name + '\''
+               + ", mark=" + mark.getName()
+               + '}';
     }
 }
