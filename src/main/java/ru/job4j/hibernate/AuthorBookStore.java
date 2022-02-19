@@ -1,12 +1,13 @@
 package ru.job4j.hibernate;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.job4j.hibernate.model.Author;
-import ru.job4j.hibernate.model.Book;
+import ru.job4j.model.Author;
+import ru.job4j.model.Book;
 
 public class AuthorBookStore {
     public static void main(String[] args) {

@@ -5,8 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.job4j.hibernate.model.Car;
-import ru.job4j.hibernate.model.Mark;
+import ru.job4j.model.Car;
+import ru.job4j.model.Mark;
 
 import java.util.ArrayList;
 import java.util.List;
