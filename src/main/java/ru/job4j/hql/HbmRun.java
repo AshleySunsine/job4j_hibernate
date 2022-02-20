@@ -17,13 +17,15 @@ public class HbmRun {
             Session session = sf.openSession();
             session.beginTransaction();
 
-           // Student one = Student.of("Alex", 21, "Moscow");
-           // Student two = Student.of("Nikolay", 28, "Saint-Petersburg");
-           // Student three = Student.of("Nikita", 25, "Kaliningrad");
+            /**
+           Student one = Student.of("Alex", 21, "Moscow");
+           Student two = Student.of("Nikolay", 28, "Saint-Petersburg");
+           Student three = Student.of("Nikita", 25, "Kaliningrad");
 
-           // session.save(one);
-           // session.save(two);
-           // session.save(three);
+           session.save(one);
+           session.save(two);
+           session.save(three);
+             **/
 
            session.createQuery("insert into Student (name, age, city) select concat(s.name, 'NEW'), s.age + 5, s.city from Student s where s.id = :ifd")
                            .setParameter("ifd", 1).executeUpdate();
