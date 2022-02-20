@@ -23,6 +23,11 @@
         <mapping class="ru.job4j.model.Book"/>
         <mapping class="ru.job4j.hql.Student"/>
         <mapping class="ru.job4j.hql.Candidate"/>
+        <mapping class="ru.job4j.hql.Bookk"/>
+        <mapping class="ru.job4j.hql.Account"/>
+        <mapping class="ru.job4j.model.Candidateee"/>
+        <mapping class="ru.job4j.model.Vacansion"/>
+        <mapping class="ru.job4j.model.VacansionBase"/>
 
 
     </session-factory>

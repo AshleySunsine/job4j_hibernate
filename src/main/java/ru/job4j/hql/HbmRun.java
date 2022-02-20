@@ -11,13 +11,14 @@ import org.hibernate.query.Query;
 public class HbmRun {
     public static void main(String[] args) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        Student rsl = null;
 
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sf.openSession();
             session.beginTransaction();
 
-            /**
+/**
            Student one = Student.of("Alex", 21, "Moscow");
            Student two = Student.of("Nikolay", 28, "Saint-Petersburg");
            Student three = Student.of("Nikita", 25, "Kaliningrad");
@@ -25,10 +26,15 @@ public class HbmRun {
            session.save(one);
            session.save(two);
            session.save(three);
-             **/
+**/
 
-           session.createQuery("insert into Student (name, age, city) select concat(s.name, 'NEW'), s.age + 5, s.city from Student s where s.id = :ifd")
-                           .setParameter("ifd", 1).executeUpdate();
+          /**  rsl = session.createQuery("select distinct st from Student st "
+                           + "join fetch st.account a "
+                           + "join fetch a.bookks b "
+                           + "where st.id = :sId", Student.class)
+                            .setParameter("sId", 7)
+                                    .uniqueResult();**/
+
 
             session.getTransaction().commit();
             session.close();
@@ -37,5 +43,7 @@ public class HbmRun {
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
+
+        System.out.println(rsl);
     }
 }
