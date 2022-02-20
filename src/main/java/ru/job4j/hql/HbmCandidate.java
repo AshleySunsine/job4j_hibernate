@@ -24,27 +24,13 @@ public class HbmCandidate {
             session.save(two);
             session.save(three);**/
 
+
            Query query = session.createQuery("from Candidate");
             for (Object q : query.list()) {
                 System.out.println(q);
             }
 
-          /**  Candidate cand = (Candidate) session.createQuery("from Candidate c where c.id = :cid").setParameter("cid", 1).uniqueResult();
-            System.out.println(cand);**/
-
-          /**  Candidate cand = (Candidate) session.createQuery("from Candidate c where c.name = :cname").setParameter("cname", "Nikita").uniqueResult();
-            System.out.println(cand);**/
-
-          /** session.createQuery("update Candidate c set c.name = :cName where c.id = :cId")
-                          .setParameter("cName", "AAA")
-                                  .setParameter("cId", 2).executeUpdate();**/
-
-         /** session.createQuery("DELETE from Candidate c where c.id = 3").executeUpdate();**/
-
-       /**  session.createQuery("insert into Candidate (name, experience, salary) "
-                + "select concat(c.name, 'OK'), c.experience, c.salary "
-                + "from Candidate c where c.id = 1").executeUpdate();**/
-
+             getCandidate(1, session);
 
             session.getTransaction().commit();
             session.close();
@@ -54,4 +40,33 @@ public class HbmCandidate {
             registry.close();
         }
     }
+
+    public static Candidate getCandidate(int id, Session session) {
+          Candidate cand = (Candidate) session.createQuery("from Candidate c where c.id = :cid").setParameter("cid", 1).uniqueResult();
+         System.out.println(cand);
+         return cand;
+    }
+
+    public static Candidate getCandidate(String name, Session session) {
+        Candidate cand = (Candidate) session.createQuery("from Candidate c where c.name = :cname").setParameter("cname", "Nikita").uniqueResult();
+        System.out.println(cand);
+        return cand;
+    }
+
+    public static void setCandidate(int id, String newName, Session session) {
+         session.createQuery("update Candidate c set c.name = :cName where c.id = :cId")
+         .setParameter("cName", newName)
+         .setParameter("cId", id).executeUpdate();
+    }
+
+    public static void deleteCandidate(int id, Session session) {
+        session.createQuery("DELETE from Candidate c where c.id = id").executeUpdate();
+    }
+
+    public static void insertCandidate(String newName, Session session) {
+          session.createQuery("insert into Candidate (name, experience, salary) "
+         + "select concat(c.name, :newName), c.experience, c.salary "
+         + "from Candidate c where c.id = 1").setParameter("newName", newName).executeUpdate();
+    }
+
 }
