@@ -1,9 +1,9 @@
 package ru.job4j.integration;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Or;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class OrdersStoreTest {
-    private BasicDataSource pool = new BasicDataSource();
+    private final BasicDataSource pool = new BasicDataSource();
 
     @Before
     public void setUp() throws SQLException {
@@ -34,6 +34,16 @@ public class OrdersStoreTest {
             e.printStackTrace();
         }
         pool.getConnection().prepareStatement(builder.toString()).executeUpdate();
+    }
+
+    @After
+    public void setDown() throws SQLException {
+        pool.setDriverClassName("org.hsqldb.jdbcDriver");
+        pool.setUrl("jdbc:hsqldb:mem:tests;sql.syntax_pgs=true");
+        pool.setUsername("sa");
+        pool.setPassword("");
+        pool.setMaxTotal(2);
+        pool.getConnection().prepareStatement("drop table orders").executeUpdate();
     }
 
     @Test
